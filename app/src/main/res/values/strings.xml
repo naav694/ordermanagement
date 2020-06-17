@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Order Management</string>
+    <string name="user">User</string>
+    <string name="password">Password</string>
+    <string name="remember_credentials">Remember credentials</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="channel_name">General</string>
+    <string name="channel_description">General notifications for order management app</string>
+    <string name="go_to_login">Log In</string>
+    <string name="full_name">Full Name</string>
+    <string name="user_name">User Name</string>
+    <string name="user_password">User Password</string>
+    <string name="create_account">Create account</string>
+    <string name="create_order">Create Order</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="advance">Advance</string>
+    <string name="debit">Debit</string>
+    <string name="price">Price</string>
+    <string name="design">Design</string>
+    <string name="filling">Filling</string>
+    <string name="product">Product</string>
+    <string name="delivery_place">Delivery place</string>
+    <string name="delivery_date">Delivery date</string>
+    <string name="confirm_password">Confirm password</string>
+</resources>

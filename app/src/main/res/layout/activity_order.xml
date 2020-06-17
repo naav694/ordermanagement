@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".view.activity.OrderActivity">
+
+    <include
+        android:id="@+id/orderToolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutOrder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/layout_redondeado"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/btnCreateOrder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderToolbar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputDeliveryDate"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/delivery_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginEnd="8dp"
+                    app:layout_goneMarginStart="8dp"
+                    app:layout_goneMarginTop="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editDeliveryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputDeliveryPlace"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/delivery_place"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputDeliveryDate"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputDeliveryDate"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputDeliveryDate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editDeliveryPlace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputTypeProduct"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputDeliveryPlace"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputDeliveryPlace"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputDeliveryPlace"
+                    android:hint="@string/product">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTypeProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputFillingProduct"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputTypeProduct"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputTypeProduct"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputTypeProduct"
+                    android:hint="@string/filling">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editFillingProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputProductDesign"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputFillingProduct"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputFillingProduct"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputFillingProduct"
+                    android:hint="@string/design">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editProductDesign"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputProductPrice"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputProductDesign"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputProductDesign"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputProductDesign"
+                    android:hint="@string/price">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editProductPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputAdvanceOrder"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputProductPrice"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputProductPrice"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputProductPrice"
+                    android:hint="@string/advance">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editAdvanceOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutInputDebitOrder"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/debit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/layoutInputAdvanceOrder"
+                    app:layout_constraintStart_toStartOf="@id/layoutInputAdvanceOrder"
+                    app:layout_constraintTop_toBottomOf="@id/layoutInputAdvanceOrder"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editDebitOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCreateOrder"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/create_order"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
