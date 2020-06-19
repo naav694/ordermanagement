@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="registerViewModel"
             type="mx.rokegcode.ordermanagement.viewmodel.RegisterViewModel" />
@@ -55,7 +54,8 @@
                     android:id="@+id/editFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:text="@={registerViewModel.fullName}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,8 @@
                     android:id="@+id/editUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:text="@={registerViewModel.userName}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +99,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:text="@={registerViewModel.userPassword}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +123,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,6 +139,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/create_account"
+            android:onClick="@{()->registerViewModel.onCreateUser()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

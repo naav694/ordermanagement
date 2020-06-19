@@ -8,11 +8,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
+import mx.rokegcode.ordermanagement.databinding.ActivityLoginBinding
 import mx.rokegcode.ordermanagement.model.data.User
+import mx.rokegcode.ordermanagement.model.response.GenericResult
 import mx.rokegcode.ordermanagement.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -22,35 +25,31 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(
+            this,
+            R.layout.activity_login
+        )
+        binding.lifecycleOwner = this
+        binding.loginViewModel = loginViewModel
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "Order Management"
 
         loginViewModel.user.observe(this, Observer {
-            if (it != null) {
-                openMainActivity(it)
-            } else {
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
+            when (it) {
+                GenericResult.Loading -> {
+                    Toast.makeText(this, "Log In...", Toast.LENGTH_LONG).show()
+                }
+                is GenericResult.Success -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("user", it.data)
+                    startActivity(intent)
+                    finish()
+                }
+                GenericResult.Error -> {
+                    Toast.makeText(this, "Error: $it", Toast.LENGTH_LONG).show()
+                }
             }
         })
-
-        initComponents()
-    }
-
-    private fun initComponents() {
-        btnLogin.setOnClickListener {
-            loginViewModel.onLogin(
-                editLoginUser.text.toString(),
-                editLoginPassword.text.toString()
-            )
-        }
-    }
-
-    private fun openMainActivity(user: User) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("user", user)
-        startActivity(intent)
-        finish()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

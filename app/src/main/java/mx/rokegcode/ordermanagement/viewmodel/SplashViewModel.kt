@@ -11,8 +11,8 @@ class SplashViewModel(private val userRepository: IUserRepository) : ViewModel()
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
 
-    fun onLogin(userName: String, userPassword: String) {
+    /*fun onLogin(userName: String, userPassword: String) {
         _user.value = userRepository.onLogin(userName, userPassword)
-    }
+    }*/
 
 }

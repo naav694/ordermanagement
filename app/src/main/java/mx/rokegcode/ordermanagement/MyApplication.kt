@@ -70,7 +70,9 @@ class MyApplication : Application() {
     private val databaseModule = module {
 
         single {
-            Room.databaseBuilder(get(), AppDatabase::class.java, DATABASE_NAME).build()
+            Room.databaseBuilder(get(), AppDatabase::class.java, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build()
         }
 
         single { get<AppDatabase>().userDao() }

@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityRegisterBinding
 import mx.rokegcode.ordermanagement.model.data.User
+import mx.rokegcode.ordermanagement.model.response.GenericResult
 import mx.rokegcode.ordermanagement.viewmodel.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -30,24 +31,25 @@ class RegisterActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Sign Up"
-        initComponents()
-    }
 
-    private fun initComponents() {
         registerViewModel.idUser.observe(this, Observer {
-            finish()
+            when(it) {
+                GenericResult.Loading -> {
+                    Toast.makeText(this, "Creating new account...", Toast.LENGTH_LONG).show()
+                }
+                is GenericResult.Success -> {
+                    if(it.data > 0) {
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Error: Account was not created", Toast.LENGTH_LONG).show()
+                    }
+                }
+                GenericResult.Error -> {
+                    Toast.makeText(this, "Error: $it", Toast.LENGTH_LONG).show()
+                }
+            }
         })
 
-        btnCreateAccount.setOnClickListener {
-            registerViewModel.onCreateUser(
-                User(
-                    editFullName.text.toString(),
-                    editUserName.text.toString(),
-                    editUserPassword.text.toString(),
-                    0
-                )
-            )
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
