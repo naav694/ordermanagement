@@ -1,6 +1,7 @@
 package mx.rokegcode.ordermanagement.model.repository
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -13,6 +14,7 @@ import java.lang.RuntimeException
 
 class UserRepository(private val userDao: UserDao) : IUserRepository {
 
+    @ExperimentalCoroutinesApi
     override fun onLogin(userName: String, userPassword: String): Flow<GenericResult<User>> = flow {
         emit(GenericResult.Loading)
         emit(GenericResult.Success(userDao.getUser(userName, userPassword)))
@@ -20,6 +22,7 @@ class UserRepository(private val userDao: UserDao) : IUserRepository {
         emit(GenericResult.Error)
     }
 
+    @ExperimentalCoroutinesApi
     override fun onSignin(user: User): Flow<GenericResult<Long>> = flow {
         emit(GenericResult.Loading)
         emit(GenericResult.Success(userDao.insert(user)))

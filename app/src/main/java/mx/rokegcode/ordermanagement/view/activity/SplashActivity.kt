@@ -26,8 +26,6 @@ class SplashActivity : AppCompatActivity() {
                 openLoginActivity()
             }
         })
-
-        //splashViewModel.onLogin("", "")
     }
 
     private fun openLoginActivity() {
