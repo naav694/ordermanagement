@@ -1,4 +1,4 @@
-package mx.rokegcode.ordermanagement.model.repository
+package mx.rokegcode.ordermanagement.model.repository.interfaces
 
 import kotlinx.coroutines.flow.Flow
 import mx.rokegcode.ordermanagement.model.response.GenericResult

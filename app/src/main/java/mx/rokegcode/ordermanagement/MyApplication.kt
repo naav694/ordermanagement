@@ -5,11 +5,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.room.Room
 import mx.rokegcode.ordermanagement.model.db.AppDatabase
-import mx.rokegcode.ordermanagement.model.repository.IUserRepository
+import mx.rokegcode.ordermanagement.model.repository.OrderRepository
+import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.model.repository.UserRepository
+import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.receiver.NotificationReceiver
 import mx.rokegcode.ordermanagement.support.CHANNEL_ID
 import mx.rokegcode.ordermanagement.support.DATABASE_NAME
@@ -27,7 +30,7 @@ class MyApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApplication)
-            modules(viewModelModule, databaseModule, repositoryModule)
+            modules(viewModelModule, databaseModule, repositoryModule, sharedPreferencesModule)
         }
 
         registerBroadcast()
@@ -57,14 +60,15 @@ class MyApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { SplashViewModel(get()) }
-        viewModel { LoginViewModel(get()) }
+        viewModel { LoginViewModel(get(), get()) }
         viewModel { RegisterViewModel(get()) }
-        //viewModel {MainViewModel(get())}
-        //viewModel {OrderViewModel(get())}
+        viewModel { MainViewModel(get()) }
+        viewModel { OrderViewModel(get()) }
     }
 
     private val repositoryModule = module {
         factory<IUserRepository> { UserRepository(get()) }
+        factory<IOrderRepository> { OrderRepository(get()) }
     }
 
     private val databaseModule = module {
@@ -78,6 +82,12 @@ class MyApplication : Application() {
         single { get<AppDatabase>().userDao() }
         single { get<AppDatabase>().orderDao() }
         single { get<AppDatabase>().customerDao() }
+    }
+
+    private val sharedPreferencesModule = module {
+        single<SharedPreferences> {
+            androidContext().getSharedPreferences("SharedLectura", Context.MODE_PRIVATE)
+        }
     }
 
 }

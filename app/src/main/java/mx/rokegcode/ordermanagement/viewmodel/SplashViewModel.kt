@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import mx.rokegcode.ordermanagement.model.data.User
-import mx.rokegcode.ordermanagement.model.repository.IUserRepository
+import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 
 class SplashViewModel(private val userRepository: IUserRepository) : ViewModel() {
 

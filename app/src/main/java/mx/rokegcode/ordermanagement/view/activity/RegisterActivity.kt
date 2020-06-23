@@ -6,18 +6,21 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityRegisterBinding
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
 
     private val registerViewModel: RegisterViewModel by viewModel()
+    private var mProgressDialog: SweetAlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,19 +36,23 @@ class RegisterActivity : AppCompatActivity() {
         supportActionBar?.title = "Sign Up"
 
         registerViewModel.idUser.observe(this, Observer {
-            when(it) {
-                GenericResult.Loading -> {
-                    Toast.makeText(this, "Creating new account...", Toast.LENGTH_LONG).show()
+            when (it) {
+                is GenericResult.Loading -> {
+                    mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
+                    mProgressDialog!!.show()
                 }
                 is GenericResult.Success -> {
-                    if(it.data > 0) {
+                    mProgressDialog!!.dismiss()
+                    if (it.data > 0) {
                         finish()
                     } else {
-                        Toast.makeText(this, "Error: Account was not created", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Error: Account was not created", Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
-                GenericResult.Error -> {
-                    Toast.makeText(this, "Error: $it", Toast.LENGTH_LONG).show()
+                is GenericResult.Error -> {
+                    mProgressDialog!!.dismiss()
+                    SweetDialogs.sweetError(this, "Error: ${it.error}").show()
                 }
             }
         })
