@@ -9,7 +9,7 @@ data class Order(
     var orderDate: String?,
     var deliveryDate: String?,
     var deliveryPlace: String?,
-    var typeProduct: String?,
+    var productDescription: String?,
     var fillingProduct: String?,
     var productDesign: String?,
     var productPrice: Double?,

@@ -1,7 +1,5 @@
 package mx.rokegcode.ordermanagement.view.activity
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.toolbar.*
@@ -9,7 +7,7 @@ import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.viewmodel.OrderViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity : BaseActivity() {
 
     private val orderViewModel: OrderViewModel by viewModel()
 

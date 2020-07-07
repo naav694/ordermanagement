@@ -7,5 +7,5 @@ import mx.rokegcode.ordermanagement.model.response.GenericResult
 interface IOrderRepository {
 
     fun setOrder(order: Order): Flow<GenericResult<Long>>
-    fun getOrder(): Flow<GenericResult<List<Order>>>
+    fun getOrders(): Flow<GenericResult<List<Order>>>
 }

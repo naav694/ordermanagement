@@ -1,4 +1,4 @@
-package mx.rokegcode.ordermanagement.model.repository
+package mx.rokegcode.ordermanagement.model.repository.implementation
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,16 +10,20 @@ import mx.rokegcode.ordermanagement.model.response.GenericResult
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.db.UserDao
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
+import mx.rokegcode.ordermanagement.model.response.LoginResult
 
 class UserRepository(private val userDao: UserDao) :
     IUserRepository {
 
     @ExperimentalCoroutinesApi
-    override fun onLogin(userName: String, userPassword: String): Flow<GenericResult<User>> = flow {
-        emit(GenericResult.Loading("Log In..."))
-        emit(GenericResult.Success(userDao.getUser(userName, userPassword)))
-    }.flowOn(Dispatchers.IO).catch {
-        emit(GenericResult.Error(it.message!!))
+    override fun onLogin(userName: String, userPassword: String): Flow<LoginResult<User>> = flow {
+        emit(LoginResult.Loading("Log In..."))
+        try {
+            val response = userDao.getUser(userName, userPassword)
+            emit(LoginResult.Success(response))
+        } catch (e: Exception) {
+            emit(LoginResult.Error(e.message!!))
+        }
     }
 
     @ExperimentalCoroutinesApi

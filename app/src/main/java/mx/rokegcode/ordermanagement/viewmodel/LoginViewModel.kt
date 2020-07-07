@@ -1,61 +1,58 @@
 package mx.rokegcode.ordermanagement.viewmodel
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import mx.rokegcode.ordermanagement.model.response.GenericResult
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
+import mx.rokegcode.ordermanagement.model.response.LoginResult
+import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
 
 
 class LoginViewModel(
     private val userRepository: IUserRepository,
-    private val sharedPreferences: SharedPreferences
-) : ViewModel() {
+    sessionHelper: ISessionHelper
+) : BaseViewModel(sessionHelper) {
 
     var userName: String = ""
     var userPassword: String = ""
     var rememberMe: Boolean = false
 
-    private val _user = MutableLiveData<GenericResult<User>>()
-    val user: LiveData<GenericResult<User>> = _user
+    private val _user = MutableLiveData<LoginResult<User>>()
+    val user: LiveData<LoginResult<User>> = _user
 
-    init {
-        val rememberedUser = sharedPreferences.getString("userName", "")
-        val rememberedPass = sharedPreferences.getString("userPassword", "")
-        if (!rememberedUser.isNullOrEmpty() && !rememberedPass.isNullOrEmpty()) {
-            onLoginFlow(rememberedUser, rememberedPass)
-        }
-    }
+    private val _loginForm = MutableLiveData<Boolean>()
+    val loginForm: LiveData<Boolean> = _loginForm
 
     fun onLogin() {
-        onLoginFlow(userName, userPassword)
-    }
-
-    private fun onLoginFlow(user: String, password: String) {
-        viewModelScope.launch {
-            userRepository.onLogin(
-                user,
-                password
-            ).collect {
-                if (rememberMe) {
-                    when (it) {
-                        is GenericResult.Success -> {
-                            with(sharedPreferences.edit()) {
-                                putString("userName", user)
-                                putString("userPassword", password)
-                                commit()
+        if (isLoginValid()) {
+            viewModelScope.launch {
+                userRepository.onLogin(
+                    userName,
+                    userPassword
+                ).collect {
+                    if (rememberMe) {
+                        when (it) {
+                            is LoginResult.Success -> {
+                                sessionHelper.setUserSession(it.data)
+                                if (rememberMe) {
+                                    sessionHelper.setRememberSession(rememberMe)
+                                }
                             }
                         }
                     }
+                    _user.value = it
                 }
-                _user.value = it
             }
+        } else {
+            _loginForm.value = false
         }
+    }
+
+    private fun isLoginValid(): Boolean {
+        return !(userName.isEmpty() || userPassword.isEmpty())
     }
 
 }

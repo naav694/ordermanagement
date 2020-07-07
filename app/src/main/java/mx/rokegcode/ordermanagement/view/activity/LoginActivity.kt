@@ -2,21 +2,17 @@ package mx.rokegcode.ordermanagement.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import cn.pedant.SweetAlert.SweetAlertDialog
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityLoginBinding
-import mx.rokegcode.ordermanagement.model.data.User
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.LoginResult
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -38,24 +34,29 @@ class LoginActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "Order Management"
 
+        initObservers()
+    }
+
+    private fun initObservers() {
         loginViewModel.user.observe(this, Observer {
             when (it) {
-                is GenericResult.Loading -> {
+                is LoginResult.Loading -> {
                     mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
                     mProgressDialog!!.show()
                 }
-                is GenericResult.Success -> {
+                is LoginResult.Success -> {
                     mProgressDialog!!.dismiss()
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("user", it.data)
-                    startActivity(intent)
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
-                is GenericResult.Error -> {
+                is LoginResult.Error -> {
                     mProgressDialog!!.dismiss()
                     SweetDialogs.sweetError(this, "Error: ${it.error}").show()
                 }
             }
+        })
+        loginViewModel.loginForm.observe(this, Observer {
+            SweetDialogs.sweetWarning(this, "Debe seleccionar una empresa e ingresar usuario y contraseña")
         })
     }
 
@@ -68,8 +69,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.btnRegisterUser -> {
-                val i = Intent(this, RegisterActivity::class.java)
-                startActivity(i)
+                startActivity(Intent(this, RegisterActivity::class.java))
                 true
             }
             else -> super.onContextItemSelected(item)

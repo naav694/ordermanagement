@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/titleDeliveryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Fecha de entrega: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textDeliveryDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@id/statusOrder"
+            app:layout_constraintStart_toEndOf="@id/titleDeliveryDate"
+            app:layout_constraintTop_toTopOf="@id/titleDeliveryDate" />
+
+        <ImageView
+            android:id="@+id/statusOrder"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/textDeliveryDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textDeliveryDate" />
+
+        <TextView
+            android:id="@+id/titleClient"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cliente"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/statusOrder"
+            app:layout_constraintStart_toStartOf="@id/titleDeliveryDate"
+            app:layout_constraintTop_toBottomOf="@id/titleDeliveryDate" />
+
+        <!--<TextView
+            android:id="@+id/titleClientOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Nombre de cliente: "
+            app:layout_constraintEnd_toEndOf="@id/statusOrder"
+            app:layout_constraintStart_toStartOf="@id/titleClient"
+            app:layout_constraintTop_toBottomOf="@id/titleClient" />-->
+
+        <TextView
+            android:id="@+id/textClientOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@id/textClientNumber"
+            app:layout_constraintStart_toStartOf="@id/titleClient"
+            app:layout_constraintTop_toBottomOf="@id/titleClient" />
+
+        <TextView
+            android:id="@+id/textClientNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/textClientOrder"
+            app:layout_constraintEnd_toEndOf="@id/titleClient"
+            app:layout_constraintTop_toTopOf="@id/textClientOrder"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/titleProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Producto: "
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/textClientNumber"
+            app:layout_constraintStart_toStartOf="@id/textClientOrder"
+            app:layout_constraintTop_toBottomOf="@id/textClientOrder" />
+
+        <TextView
+            android:id="@+id/textProductDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textPrice"
+            app:layout_constraintStart_toStartOf="@id/titleProduct"
+            app:layout_constraintTop_toBottomOf="@id/titleProduct" />
+
+        <TextView
+            android:id="@+id/textPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/textProductDesc"
+            app:layout_constraintEnd_toEndOf="@id/titleProduct"
+            app:layout_constraintTop_toTopOf="@id/textProductDesc"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

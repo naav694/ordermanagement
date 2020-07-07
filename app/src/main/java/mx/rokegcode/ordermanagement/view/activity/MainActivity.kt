@@ -1,23 +1,28 @@
 package mx.rokegcode.ordermanagement.view.activity
 
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
+import mx.rokegcode.ordermanagement.model.data.Order
+import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.view.adapter.OrderAdapter
+import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.MainViewModel
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
-    private val sharedPreferences: SharedPreferences by inject()
+    private var orderAdapter: OrderAdapter? = null
+    private var mProgressDialog: SweetAlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +30,41 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Order List"
         initComponents()
+        initObservers()
+        mainViewModel.getOrders()
+    }
+
+    private fun initObservers() {
+        mainViewModel.resultOrders.observe(this, Observer {
+            when (it) {
+                is GenericResult.Loading -> {
+                    mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
+                    mProgressDialog!!.show()
+                }
+                is GenericResult.Success -> {
+                    mProgressDialog!!.dismiss()
+                    initOrderRecyclerView(it.data)
+                }
+                is GenericResult.Error -> {
+                    mProgressDialog!!.dismiss()
+                    SweetDialogs.sweetError(this, "Error: ${it.error}").show()
+                }
+            }
+        })
     }
 
     private fun initComponents() {
         btnAddOrder.setOnClickListener {
             startActivity(Intent(this, OrderActivity::class.java))
+        }
+    }
+
+    private fun initOrderRecyclerView(orderList: List<Order>) {
+        orderAdapter = OrderAdapter(orderList)
+        val layout = LinearLayoutManager(this)
+        orderRecyclerView.apply {
+            adapter = orderAdapter
+            layoutManager = layout
         }
     }
 
@@ -42,11 +77,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.btnLogOut -> {
-                with(sharedPreferences.edit()) {
-                    putString("userName", "")
-                    putString("userPassword", "")
-                    commit()
-                }
+                sessionHelper.deleteUserSession()
+                sessionHelper.setRememberSession(false)
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
                 true

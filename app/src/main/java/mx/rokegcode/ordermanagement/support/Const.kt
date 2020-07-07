@@ -14,3 +14,7 @@ const val PATH_APPEND_ID = "/#"
 
 //Notifications
 const val CHANNEL_ID = "ORDER_MANAGEMENT_NOTIFICATION"
+
+//SESSION
+const val SESSION_USER = "SESSION_USER"
+const val REMEMBER_SESSION = "REMEMBER_SESSION"

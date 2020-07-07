@@ -8,14 +8,17 @@ import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.os.Build
 import androidx.room.Room
+import com.google.gson.Gson
 import mx.rokegcode.ordermanagement.model.db.AppDatabase
-import mx.rokegcode.ordermanagement.model.repository.OrderRepository
+import mx.rokegcode.ordermanagement.model.repository.implementation.OrderRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.repository.UserRepository
+import mx.rokegcode.ordermanagement.model.repository.implementation.UserRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.receiver.NotificationReceiver
 import mx.rokegcode.ordermanagement.support.CHANNEL_ID
 import mx.rokegcode.ordermanagement.support.DATABASE_NAME
+import mx.rokegcode.ordermanagement.support.SessionHelper
+import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
 import mx.rokegcode.ordermanagement.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -30,7 +33,12 @@ class MyApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApplication)
-            modules(viewModelModule, databaseModule, repositoryModule, sharedPreferencesModule)
+            modules(
+                viewModelModule,
+                databaseModule,
+                repositoryModule,
+                helperModule
+            )
         }
 
         registerBroadcast()
@@ -59,16 +67,24 @@ class MyApplication : Application() {
     }
 
     private val viewModelModule = module {
-        viewModel { SplashViewModel(get()) }
+        viewModel { SplashViewModel(get(), get()) }
         viewModel { LoginViewModel(get(), get()) }
         viewModel { RegisterViewModel(get()) }
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get()) }
         viewModel { OrderViewModel(get()) }
     }
 
     private val repositoryModule = module {
-        factory<IUserRepository> { UserRepository(get()) }
-        factory<IOrderRepository> { OrderRepository(get()) }
+        factory<IUserRepository> {
+            UserRepository(
+                get()
+            )
+        }
+        factory<IOrderRepository> {
+            OrderRepository(
+                get()
+            )
+        }
     }
 
     private val databaseModule = module {
@@ -84,10 +100,15 @@ class MyApplication : Application() {
         single { get<AppDatabase>().customerDao() }
     }
 
-    private val sharedPreferencesModule = module {
+    private val helperModule = module {
+
+        single { Gson() }
+
         single<SharedPreferences> {
-            androidContext().getSharedPreferences("SharedLectura", Context.MODE_PRIVATE)
+            androidContext().getSharedPreferences("SharedOrderManagement", Context.MODE_PRIVATE)
         }
+
+        factory<ISessionHelper> { SessionHelper(get(), get()) }
     }
 
 }
