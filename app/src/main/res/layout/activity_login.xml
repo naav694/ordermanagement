@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground"
+        android:background="@color/colorBackgroundLogin"
         tools:context=".view.activity.LoginActivity">
 
         <include
@@ -26,13 +26,13 @@
             android:id="@+id/imageLogoCompany"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/logo_company"
+            android:layout_margin="16dp"
+            android:src="@drawable/logo_company_noback"
             app:layout_constraintBottom_toTopOf="@id/layoutLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/loginToolbar"
+            app:layout_constraintVertical_bias="1.0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutLogin"
@@ -41,7 +41,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:elevation="4dp"
             android:background="@drawable/layout_redondeado"
             app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +55,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="@string/user"
+                android:hint="@string/usuario"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -77,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/password"
+                android:hint="@string/contrasena"
                 app:layout_constraintEnd_toEndOf="@id/loginInputUser"
                 app:layout_constraintStart_toStartOf="@id/loginInputUser"
                 app:layout_constraintTop_toBottomOf="@id/loginInputUser"
@@ -95,18 +94,43 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
-                android:id="@+id/loginCheckRecordar"
+                android:id="@+id/loginCheckRemember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                android:checked="@={loginViewModel.rememberMe}"
+                android:text="@string/recordar_credenciales"
+                app:layout_constraintEnd_toEndOf="@+id/loginInputPassword"
+                app:layout_constraintStart_toStartOf="@+id/loginInputPassword"
+                app:layout_constraintTop_toBottomOf="@id/loginInputPassword" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:elevation="4dp"
-                android:checked="@={loginViewModel.rememberMe}"
-                android:text="@string/remember_credentials"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/loginInputPassword"
-                app:layout_constraintStart_toStartOf="@+id/loginInputPassword"
-                app:layout_constraintTop_toBottomOf="@id/loginInputPassword" />
+                app:layout_constraintEnd_toEndOf="@+id/loginCheckRemember"
+                app:layout_constraintStart_toStartOf="@id/loginCheckRemember"
+                app:layout_constraintTop_toBottomOf="@id/loginCheckRemember">
+
+                <TextView
+                    android:id="@+id/titleSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿No tienes una cuenta?, " />
+
+                <TextView
+                    android:id="@+id/textSignIng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="¡Registrate!"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,7 +142,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/log_in"
+            android:text="@string/iniciar_sesion"
             android:onClick="@{()->loginViewModel.onLogin()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

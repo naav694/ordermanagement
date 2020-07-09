@@ -23,4 +23,8 @@
     <string name="delivery_place">Delivery place</string>
     <string name="delivery_date">Delivery date</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="recordar_credenciales">Recordar credenciales</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="usuario">Usuario</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
 </resources>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import cn.pedant.SweetAlert.SweetAlertDialog
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityLoginBinding
@@ -35,6 +36,9 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar!!.title = "Order Management"
 
         initObservers()
+        textSignIng.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
     }
 
     private fun initObservers() {
@@ -60,19 +64,4 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_login, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.btnRegisterUser -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
-                true
-            }
-            else -> super.onContextItemSelected(item)
-        }
-    }
 }
