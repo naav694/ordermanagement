@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.response.LoginResult
+import mx.rokegcode.ordermanagement.model.response.GenericResult
 import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
 
 
@@ -20,8 +20,8 @@ class LoginViewModel(
     var userPassword: String = ""
     var rememberMe: Boolean = false
 
-    private val _user = MutableLiveData<LoginResult<User>>()
-    val user: LiveData<LoginResult<User>> = _user
+    private val _user = MutableLiveData<GenericResult<User>>()
+    val user: LiveData<GenericResult<User>> = _user
 
     private val _loginForm = MutableLiveData<Boolean>()
     val loginForm: LiveData<Boolean> = _loginForm
@@ -34,7 +34,7 @@ class LoginViewModel(
                     userPassword
                 ).collect {
                     when (it) {
-                        is LoginResult.Success -> {
+                        is GenericResult.Success -> {
                             sessionHelper.setUserSession(it.data)
                             if (rememberMe) {
                                 sessionHelper.setRememberSession(rememberMe)

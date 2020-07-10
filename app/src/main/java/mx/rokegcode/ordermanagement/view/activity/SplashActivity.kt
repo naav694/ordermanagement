@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import mx.rokegcode.ordermanagement.R
-import mx.rokegcode.ordermanagement.model.response.LoginResult
+import mx.rokegcode.ordermanagement.model.response.GenericResult
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.SplashViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,13 +24,13 @@ class SplashActivity : AppCompatActivity() {
     private fun initObservers() {
         splashViewModel.onLogin.observe(this, Observer {
             when (it) {
-                is LoginResult.LoginActivity -> {
+                is GenericResult.LoginActivity -> {
                     startActivity(Intent(this, LoginActivity::class.java))
                 }
-                is LoginResult.Success -> {
+                is GenericResult.Success -> {
                     startActivity(Intent(this, MainActivity::class.java))
                 }
-                is LoginResult.Error -> {
+                is GenericResult.Error -> {
                     SweetDialogs.sweetError(this, it.error)
                 }
             }

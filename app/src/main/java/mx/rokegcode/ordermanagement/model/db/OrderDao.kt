@@ -13,9 +13,9 @@ interface OrderDao {
     suspend fun insert(order: Order): Long
 
     @Update
-    fun update(order: Order)
+    suspend fun update(order: Order)
 
     @Query("DELETE FROM `order` WHERE idOrder = :idOrder")
-    fun deleteById(idOrder: Long)
+    suspend fun deleteById(idOrder: Long)
 
 }
