@@ -75,16 +75,8 @@ class MyApplication : Application() {
     }
 
     private val repositoryModule = module {
-        factory<IUserRepository> {
-            UserRepository(
-                get()
-            )
-        }
-        factory<IOrderRepository> {
-            OrderRepository(
-                get()
-            )
-        }
+        factory<IUserRepository> { UserRepository(get()) }
+        factory<IOrderRepository> { OrderRepository(get()) }
     }
 
     private val databaseModule = module {

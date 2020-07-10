@@ -7,10 +7,10 @@ import mx.rokegcode.ordermanagement.model.data.Order
 interface OrderDao {
 
     @Query("SELECT * FROM `ORDER`")
-    fun getOrder(): List<Order>
+    suspend fun getOrder(): List<Order>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(order: Order): Long
+    suspend fun insert(order: Order): Long
 
     @Update
     fun update(order: Order)

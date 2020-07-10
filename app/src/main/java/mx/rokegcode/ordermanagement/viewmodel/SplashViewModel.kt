@@ -28,6 +28,7 @@ class SplashViewModel(
                 _onLogin.value = LoginResult.LoginActivity
             } else {
                 val user = sessionHelper.getUserSession()
+                delay(1000)
                 userRepository.onLogin(
                     user.userName,
                     user.userPassword

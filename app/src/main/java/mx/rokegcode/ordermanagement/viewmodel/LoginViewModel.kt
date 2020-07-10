@@ -33,13 +33,11 @@ class LoginViewModel(
                     userName,
                     userPassword
                 ).collect {
-                    if (rememberMe) {
-                        when (it) {
-                            is LoginResult.Success -> {
-                                sessionHelper.setUserSession(it.data)
-                                if (rememberMe) {
-                                    sessionHelper.setRememberSession(rememberMe)
-                                }
+                    when (it) {
+                        is LoginResult.Success -> {
+                            sessionHelper.setUserSession(it.data)
+                            if (rememberMe) {
+                                sessionHelper.setRememberSession(rememberMe)
                             }
                         }
                     }
