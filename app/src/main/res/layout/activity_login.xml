@@ -56,7 +56,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="@string/usuario"
+                android:hint="@string/user_name"
                 app:hintTextColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/contrasena"
+                android:hint="@string/password"
                 app:hintTextColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="@id/loginInputUser"
                 app:layout_constraintStart_toStartOf="@id/loginInputUser"
@@ -103,7 +103,7 @@
                 android:layout_marginTop="8dp"
                 android:checked="@={loginViewModel.rememberMe}"
                 android:elevation="4dp"
-                android:text="@string/recordar_credenciales"
+                android:text="@string/remember_credentials"
                 app:layout_constraintEnd_toEndOf="@+id/loginInputPassword"
                 app:layout_constraintStart_toStartOf="@+id/loginInputPassword"
                 app:layout_constraintTop_toBottomOf="@id/loginInputPassword" />
@@ -122,14 +122,14 @@
                     android:id="@+id/titleSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¿No tienes una cuenta?, " />
+                    android:text="@string/don_t_have_an_account" />
 
                 <TextView
                     android:id="@+id/textSignIng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="¡Registrate!"
+                    android:text="@string/sign_up"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
@@ -146,7 +146,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="@{()->loginViewModel.onLogin()}"
-            android:text="@string/iniciar_sesion"
+            android:text="@string/log_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

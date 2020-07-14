@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginForm.observe(this, Observer {
             SweetDialogs.sweetWarning(
                 this,
-                "Debe seleccionar una empresa e ingresar usuario y contraseña"
+                getString(R.string.user_pass_warning)
             )
         })
     }

@@ -28,4 +28,8 @@
     <string name="usuario">Usuario</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="crear_cuenta">Crear cuenta</string>
+    <string name="no_tienes_una_cuenta">¿No tienes una cuenta?,</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="registrate">¡Registrate!</string>
+    <string name="user_pass_warning">You must enter Username and Password</string>
 </resources>
