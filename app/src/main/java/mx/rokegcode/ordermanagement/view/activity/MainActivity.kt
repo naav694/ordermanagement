@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.model.data.Order
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.DataState
 import mx.rokegcode.ordermanagement.view.adapter.OrderAdapter
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.MainViewModel
@@ -37,15 +37,15 @@ class MainActivity : BaseActivity() {
     private fun initObservers() {
         mainViewModel.resultOrders.observe(this, Observer {
             when (it) {
-                is GenericResult.Loading -> {
+                is DataState.Loading -> {
                     mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
                     mProgressDialog!!.show()
                 }
-                is GenericResult.Success -> {
+                is DataState.Success -> {
                     mProgressDialog!!.dismiss()
                     initOrderRecyclerView(it.data)
                 }
-                is GenericResult.Error -> {
+                is DataState.Error -> {
                     mProgressDialog!!.dismiss()
                     SweetDialogs.sweetError(this, "Error: ${it.error}").show()
                 }

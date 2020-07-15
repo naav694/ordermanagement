@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.DataState
 import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
 
 class MainViewModel(
@@ -15,8 +15,8 @@ class MainViewModel(
     sessionHelper: ISessionHelper
 ) : BaseViewModel(sessionHelper) {
 
-    private val _resultOrders = MutableLiveData<GenericResult<List<Order>>>()
-    var resultOrders: LiveData<GenericResult<List<Order>>> = _resultOrders
+    private val _resultOrders = MutableLiveData<DataState<List<Order>>>()
+    var resultOrders: LiveData<DataState<List<Order>>> = _resultOrders
 
     fun getOrders() {
         viewModelScope.launch {

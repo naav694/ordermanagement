@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.DataState
 
 class RegisterViewModel(private val userRepository: IUserRepository) : ViewModel() {
 
@@ -17,8 +17,8 @@ class RegisterViewModel(private val userRepository: IUserRepository) : ViewModel
     var userPassword: String = ""
 
 
-    private val _idUser = MutableLiveData<GenericResult<Long>>()
-    val idUser: LiveData<GenericResult<Long>> = _idUser
+    private val _idUser = MutableLiveData<DataState<Long>>()
+    val idUser: LiveData<DataState<Long>> = _idUser
 
     fun onCreateUser() {
         val user = User()

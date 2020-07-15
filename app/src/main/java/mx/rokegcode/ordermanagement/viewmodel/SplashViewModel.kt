@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.DataState
 import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
 
 class SplashViewModel(
@@ -16,15 +16,15 @@ class SplashViewModel(
     sessionHelper: ISessionHelper
 ) : BaseViewModel(sessionHelper) {
 
-    private var _onLogin = MutableLiveData<GenericResult<User>>()
-    val onLogin: LiveData<GenericResult<User>> get() = _onLogin
+    private var _onLogin = MutableLiveData<DataState<User>>()
+    val onLogin: LiveData<DataState<User>> get() = _onLogin
 
     init {
         viewModelScope.launch {
             val remember = sessionHelper.getRememberSession()
             if (!remember) {
                 delay(1000)
-                _onLogin.value = GenericResult.LoginActivity
+                _onLogin.value = DataState.LoginActivity
             } else {
                 val user = sessionHelper.getUserSession()
                 delay(1000)

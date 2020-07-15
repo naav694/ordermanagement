@@ -7,12 +7,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import cn.pedant.SweetAlert.SweetAlertDialog
-import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityRegisterBinding
-import mx.rokegcode.ordermanagement.model.data.User
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.DataState
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -37,11 +35,11 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.idUser.observe(this, Observer {
             when (it) {
-                is GenericResult.Loading -> {
+                is DataState.Loading -> {
                     mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
                     mProgressDialog!!.show()
                 }
-                is GenericResult.Success -> {
+                is DataState.Success -> {
                     mProgressDialog!!.dismiss()
                     if (it.data > 0) {
                         finish()
@@ -50,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                             .show()
                     }
                 }
-                is GenericResult.Error -> {
+                is DataState.Error -> {
                     mProgressDialog!!.dismiss()
                     SweetDialogs.sweetError(this, "Error: ${it.error}").show()
                 }

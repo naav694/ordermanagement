@@ -5,27 +5,27 @@ import kotlinx.coroutines.flow.flow
 import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.db.OrderDao
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
-import mx.rokegcode.ordermanagement.model.response.GenericResult
+import mx.rokegcode.ordermanagement.model.response.DataState
 
 class OrderRepository(private val orderDao: OrderDao) : IOrderRepository {
 
-    override fun setOrder(order: Order): Flow<GenericResult<Long>> = flow {
-        emit(GenericResult.Loading("Creating order..."))
+    override fun setOrder(order: Order): Flow<DataState<Long>> = flow {
+        emit(DataState.Loading("Creating order..."))
         try {
             val response = orderDao.insert(order)
-            emit(GenericResult.Success(response))
+            emit(DataState.Success(response))
         } catch (e: Exception) {
-            emit(GenericResult.Error(e.message!!))
+            emit(DataState.Error(e.message!!))
         }
     }
 
-    override fun getOrders(): Flow<GenericResult<List<Order>>> = flow {
-        emit(GenericResult.Loading("Getting orders..."))
+    override fun getOrders(): Flow<DataState<List<Order>>> = flow {
+        emit(DataState.Loading("Getting orders..."))
         try {
             val response = orderDao.getOrder()
-            emit(GenericResult.Success(response))
+            emit(DataState.Success(response))
         } catch (e: Exception) {
-            emit(GenericResult.Error(e.message!!))
+            emit(DataState.Error(e.message!!))
         }
     }
 }
