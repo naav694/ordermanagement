@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.response.DataState
+import mx.rokegcode.ordermanagement.util.DataState
 
 class RegisterViewModel(private val userRepository: IUserRepository) : ViewModel() {
 

@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.response.DataState
-import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
+import mx.rokegcode.ordermanagement.util.DataState
+import mx.rokegcode.ordermanagement.util.interfaces.ISessionHelper
 
 
 class LoginViewModel(

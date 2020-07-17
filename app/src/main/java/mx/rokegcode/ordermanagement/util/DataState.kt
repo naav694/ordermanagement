@@ -1,4 +1,4 @@
-package mx.rokegcode.ordermanagement.model.response
+package mx.rokegcode.ordermanagement.util
 
 sealed class DataState<out R> {
     data class Success<out T>(val data: T) : DataState<T>()

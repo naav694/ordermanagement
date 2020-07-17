@@ -10,7 +10,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityRegisterBinding
-import mx.rokegcode.ordermanagement.model.response.DataState
+import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel

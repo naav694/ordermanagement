@@ -1,9 +1,9 @@
-package mx.rokegcode.ordermanagement.support
+package mx.rokegcode.ordermanagement.util
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import mx.rokegcode.ordermanagement.model.data.User
-import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
+import mx.rokegcode.ordermanagement.util.interfaces.ISessionHelper
 
 class SessionHelper(private val sharedPreferences: SharedPreferences, private val gson: Gson) :
     ISessionHelper {

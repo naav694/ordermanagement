@@ -1,4 +1,4 @@
-package mx.rokegcode.ordermanagement.support
+package mx.rokegcode.ordermanagement.util
 
 import android.net.Uri
 

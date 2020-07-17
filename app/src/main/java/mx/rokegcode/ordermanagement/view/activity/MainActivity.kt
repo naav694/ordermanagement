@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.model.data.Order
-import mx.rokegcode.ordermanagement.model.response.DataState
+import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.view.adapter.OrderAdapter
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.MainViewModel

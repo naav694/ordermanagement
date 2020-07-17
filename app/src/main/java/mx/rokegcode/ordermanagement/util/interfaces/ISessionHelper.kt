@@ -1,4 +1,4 @@
-package mx.rokegcode.ordermanagement.support.interfaces
+package mx.rokegcode.ordermanagement.util.interfaces
 
 import mx.rokegcode.ordermanagement.model.data.User
 

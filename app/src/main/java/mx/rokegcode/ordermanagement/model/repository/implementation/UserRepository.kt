@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flow
 import mx.rokegcode.ordermanagement.model.data.User
 import mx.rokegcode.ordermanagement.model.db.UserDao
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
-import mx.rokegcode.ordermanagement.model.response.DataState
+import mx.rokegcode.ordermanagement.util.DataState
 
 class UserRepository(private val userDao: UserDao) :
     IUserRepository {

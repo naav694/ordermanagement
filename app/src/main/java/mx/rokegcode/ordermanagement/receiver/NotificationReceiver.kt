@@ -7,7 +7,7 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import mx.rokegcode.ordermanagement.R
-import mx.rokegcode.ordermanagement.support.CHANNEL_ID
+import mx.rokegcode.ordermanagement.util.CHANNEL_ID
 import mx.rokegcode.ordermanagement.view.activity.LoginActivity
 
 class NotificationReceiver : BroadcastReceiver() {

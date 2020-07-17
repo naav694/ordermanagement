@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import mx.rokegcode.ordermanagement.model.data.Customer
 import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.data.User
-import mx.rokegcode.ordermanagement.support.DATABASE_VERSION
+import mx.rokegcode.ordermanagement.util.DATABASE_VERSION
 
 @Database(
     entities = [User::class, Order::class, Customer::class],

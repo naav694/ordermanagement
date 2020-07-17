@@ -15,10 +15,10 @@ import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.UserRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.receiver.NotificationReceiver
-import mx.rokegcode.ordermanagement.support.CHANNEL_ID
-import mx.rokegcode.ordermanagement.support.DATABASE_NAME
-import mx.rokegcode.ordermanagement.support.SessionHelper
-import mx.rokegcode.ordermanagement.support.interfaces.ISessionHelper
+import mx.rokegcode.ordermanagement.util.CHANNEL_ID
+import mx.rokegcode.ordermanagement.util.DATABASE_NAME
+import mx.rokegcode.ordermanagement.util.SessionHelper
+import mx.rokegcode.ordermanagement.util.interfaces.ISessionHelper
 import mx.rokegcode.ordermanagement.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

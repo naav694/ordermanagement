@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.databinding.ActivityLoginBinding
-import mx.rokegcode.ordermanagement.model.response.DataState
+import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
