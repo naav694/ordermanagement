@@ -32,13 +32,17 @@ class LoginActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "Order Management"
 
-        initObservers()
+        subscribeObserver()
+        initComponent()
+    }
+
+    private fun initComponent() {
         textSignIng.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
-    private fun initObservers() {
+    private fun subscribeObserver() {
         loginViewModel.user.observe(this, Observer {
             when (it) {
                 is DataState.Loading -> {
@@ -52,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is DataState.Error -> {
                     mProgressDialog!!.dismiss()
-                    SweetDialogs.sweetError(this, "Error: ${it.error}").show()
+                    SweetDialogs.sweetError(this, "Error: ${it.error.message}").show()
                 }
             }
         })

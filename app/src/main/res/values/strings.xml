@@ -32,4 +32,7 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="registrate">¡Registrate!</string>
     <string name="user_pass_warning">You must enter Username and Password</string>
+    <string name="select_a_customer">Select a customer</string>
+    <string name="client">Client</string>
+    <string name="order_status">ORDER STATUS</string>
 </resources>

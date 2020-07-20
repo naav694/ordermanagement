@@ -35,17 +35,31 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="Seleccione un cliente"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/select_a_customer"
+                app:layout_constraintEnd_toStartOf="@id/btnAddClient"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <AutoCompleteTextView
+                    android:id="@+id/customerDropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddClient"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                app:icon="@drawable/add_user_50"
+                app:iconSize="45dp"
+                app:iconTint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@id/layoutSelectClient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/layoutSelectClient" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutInputDeliveryDate"
@@ -54,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/delivery_date"
-                app:layout_constraintEnd_toEndOf="@id/layoutSelectClient"
+                app:layout_constraintEnd_toEndOf="@id/btnAddClient"
                 app:layout_constraintStart_toStartOf="@id/layoutSelectClient"
                 app:layout_constraintTop_toBottomOf="@id/layoutSelectClient"
                 app:layout_goneMarginEnd="8dp"

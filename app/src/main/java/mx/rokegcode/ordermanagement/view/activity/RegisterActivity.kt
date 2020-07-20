@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 is DataState.Error -> {
                     mProgressDialog!!.dismiss()
-                    SweetDialogs.sweetError(this, "Error: ${it.error}").show()
+                    SweetDialogs.sweetError(this, "Error: ${it.error.message}").show()
                 }
             }
         })

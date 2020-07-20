@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 is DataState.Error -> {
-                    SweetDialogs.sweetError(this, it.error)
+                    SweetDialogs.sweetError(this, it.error.message)
                 }
             }
         })

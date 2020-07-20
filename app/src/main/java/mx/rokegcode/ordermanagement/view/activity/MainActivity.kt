@@ -29,12 +29,12 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Order List"
-        initComponents()
-        initObservers()
+        initComponent()
+        subscribeObserver()
         mainViewModel.getOrders()
     }
 
-    private fun initObservers() {
+    private fun subscribeObserver() {
         mainViewModel.resultOrders.observe(this, Observer {
             when (it) {
                 is DataState.Loading -> {
@@ -47,13 +47,13 @@ class MainActivity : BaseActivity() {
                 }
                 is DataState.Error -> {
                     mProgressDialog!!.dismiss()
-                    SweetDialogs.sweetError(this, "Error: ${it.error}").show()
+                    SweetDialogs.sweetError(this, "Error: ${it.error.message}").show()
                 }
             }
         })
     }
 
-    private fun initComponents() {
+    private fun initComponent() {
         btnAddOrder.setOnClickListener {
             startActivity(Intent(this, OrderActivity::class.java))
         }

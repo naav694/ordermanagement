@@ -9,11 +9,6 @@ import android.provider.Telephony;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import mx.rokegcode.ordermanagement.R;
 
-/**
- * @author Edgar Rodriguez / Dinamo
- * @version 1.0, Diciembre/2018.
- */
-
 public abstract class SweetDialogs {
 
     public static SweetAlertDialog sweetLoading(Context context, String text) {

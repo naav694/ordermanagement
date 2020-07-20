@@ -2,7 +2,8 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/cardview_redondeado">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Fecha de entrega: "
+            android:text="@string/delivery_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,28 +36,19 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@id/textDeliveryDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textDeliveryDate" />
+            app:layout_constraintTop_toTopOf="@id/textDeliveryDate"
+            android:contentDescription="@string/order_status" />
 
         <TextView
             android:id="@+id/titleClient"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Cliente"
+            android:text="@string/client"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@id/statusOrder"
             app:layout_constraintStart_toStartOf="@id/titleDeliveryDate"
             app:layout_constraintTop_toBottomOf="@id/titleDeliveryDate" />
-
-        <!--<TextView
-            android:id="@+id/titleClientOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Nombre de cliente: "
-            app:layout_constraintEnd_toEndOf="@id/statusOrder"
-            app:layout_constraintStart_toStartOf="@id/titleClient"
-            app:layout_constraintTop_toBottomOf="@id/titleClient" />-->
 
         <TextView
             android:id="@+id/textClientOrder"
@@ -82,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Producto: "
+            android:text="@string/product"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@id/textClientNumber"
             app:layout_constraintStart_toStartOf="@id/textClientOrder"

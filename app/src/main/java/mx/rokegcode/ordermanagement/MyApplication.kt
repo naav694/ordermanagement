@@ -10,9 +10,11 @@ import android.os.Build
 import androidx.room.Room
 import com.google.gson.Gson
 import mx.rokegcode.ordermanagement.model.db.AppDatabase
+import mx.rokegcode.ordermanagement.model.repository.implementation.CustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.OrderRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.UserRepository
+import mx.rokegcode.ordermanagement.model.repository.interfaces.ICustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.receiver.NotificationReceiver
 import mx.rokegcode.ordermanagement.util.CHANNEL_ID
@@ -71,12 +73,13 @@ class MyApplication : Application() {
         viewModel { LoginViewModel(get(), get()) }
         viewModel { RegisterViewModel(get()) }
         viewModel { MainViewModel(get(), get()) }
-        viewModel { OrderViewModel(get()) }
+        viewModel { OrderViewModel(get(), get()) }
     }
 
     private val repositoryModule = module {
         factory<IUserRepository> { UserRepository(get()) }
         factory<IOrderRepository> { OrderRepository(get()) }
+        factory<ICustomerRepository> { CustomerRepository(get()) }
     }
 
     private val databaseModule = module {
@@ -93,7 +96,6 @@ class MyApplication : Application() {
     }
 
     private val helperModule = module {
-
         single { Gson() }
 
         single<SharedPreferences> {
