@@ -35,4 +35,7 @@
     <string name="select_a_customer">Select a customer</string>
     <string name="client">Client</string>
     <string name="order_status">ORDER STATUS</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_address">Customer Address</string>
+    <string name="customer_phone_number">Customer Phone Number</string>
 </resources>

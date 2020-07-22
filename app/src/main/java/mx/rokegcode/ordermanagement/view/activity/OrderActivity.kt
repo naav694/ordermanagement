@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import androidx.lifecycle.Observer
+import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_order.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.model.data.Customer
+import mx.rokegcode.ordermanagement.util.DataState
+import mx.rokegcode.ordermanagement.view.dialog.AddCustomerDialog
+import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
 import mx.rokegcode.ordermanagement.viewmodel.OrderStateEvent
 import mx.rokegcode.ordermanagement.viewmodel.OrderViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class OrderActivity : BaseActivity() {
+class OrderActivity : BaseActivity(), AddCustomerDialog.AddCustomerCallback {
 
     private val orderViewModel: OrderViewModel by viewModel()
+    private var mProgressDialog: SweetAlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +34,9 @@ class OrderActivity : BaseActivity() {
     }
 
     private fun initComponent() {
-        TODO("Not yet implemented")
+        btnAddCustomer.setOnClickListener {
+
+        }
     }
 
     private fun initCustomerDropdown(customers: List<Customer>) {
@@ -42,7 +50,21 @@ class OrderActivity : BaseActivity() {
     }
 
     private fun subscribeObserver() {
-        TODO("Not yet implemented")
+        orderViewModel.dataState.observe(this, Observer {
+            when(it) {
+                is DataState.Loading -> {
+                    mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
+                    mProgressDialog!!.show()
+                }
+                is DataState.Success -> {
+                    mProgressDialog!!.dismissWithAnimation()
+                    initCustomerDropdown(it.data)
+                }
+                is DataState.Error -> {
+                    SweetDialogs.sweetError(this, it.error.message).show()
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -53,6 +75,10 @@ class OrderActivity : BaseActivity() {
             }
             else -> super.onContextItemSelected(item)
         }
+    }
+
+    override fun onAddClicked(customer: Customer) {
+        orderViewModel.setStateEvent(OrderStateEvent.SetCustomer(customer))
     }
 
 }
