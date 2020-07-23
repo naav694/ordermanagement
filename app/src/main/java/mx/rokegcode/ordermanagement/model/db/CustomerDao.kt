@@ -6,11 +6,11 @@ import mx.rokegcode.ordermanagement.model.data.Customer
 @Dao
 interface CustomerDao {
 
-    @Query("SELECT * FROM CUSTOMER ORDER BY customerName ASC")
+    @Query("SELECT * FROM customer")
     suspend fun getCustomers() : List<Customer>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setCustomer(customer: Customer)
+    suspend fun setCustomer(customer: Customer) : Long
 
     @Update
     suspend fun update(customer: Customer)

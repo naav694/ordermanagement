@@ -11,17 +11,17 @@ import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.repository.interfaces.ICustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.util.DataState
+import mx.rokegcode.ordermanagement.view.state.OrderStateEvent
 
 class OrderViewModel(
     private val orderRepository: IOrderRepository,
     private val customerRepository: ICustomerRepository
 ) : ViewModel() {
+    private val _customerList = MutableLiveData<DataState<List<Customer>>>()
+    val customerList: LiveData<DataState<List<Customer>>> = _customerList
 
-    private val _customerList: MutableLiveData<DataState<List<Customer>>> = MutableLiveData()
-    var customerList: LiveData<DataState<List<Customer>>> = _customerList
-
-    private val _customerInsert: MutableLiveData<DataState<Long>> = MutableLiveData()
-    var customerInsert: LiveData<DataState<Long>> = _customerInsert
+    private val _customerInsert = MutableLiveData<DataState<Long>>()
+    val customerInsert: LiveData<DataState<Long>> = _customerInsert
 
     fun onCreateOrder(order: Order) {
         viewModelScope.launch {
@@ -31,44 +31,22 @@ class OrderViewModel(
         }
     }
 
-    fun setCustomer(customer: Customer) {
-        viewModelScope.launch {
-            customerRepository.setCustomer(customer).collect {
-                _customerInsert.value = it
-            }
-        }
-    }
-
-    fun getCustomers() {
-        viewModelScope.launch {
-            customerRepository.getCustomers().collect {
-                _customerList.value = it
-            }
-        }
-    }
-
-    /*fun setStateEvent(orderStateEvent: OrderStateEvent) {
+    fun setStateEvent(orderStateEvent: OrderStateEvent) {
         viewModelScope.launch {
             when (orderStateEvent) {
                 is OrderStateEvent.GetCustomers -> {
                     customerRepository.getCustomers().collect { dataState ->
-                        _dataState.value = dataState
+                        _customerList.value = dataState
                     }
                 }
                 is OrderStateEvent.SetCustomer -> {
-                    customerRepository.setCustomer().collect { dataState ->
-
+                    customerRepository.setCustomer(orderStateEvent.customer).collect { dataState ->
+                        _customerInsert.value = dataState
                     }
                 }
             }
         }
-    }*/
+    }
 
 }
-
-/*sealed class OrderStateEvent<out R> {
-    object GetCustomers : OrderStateEvent<Nothing>()
-    data class SetCustomer<out T>(val customer: Customer) : OrderStateEvent<T>()
-    object None : OrderStateEvent<Nothing>()
-}*/
 

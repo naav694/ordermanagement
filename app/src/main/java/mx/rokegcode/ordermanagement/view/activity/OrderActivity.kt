@@ -13,11 +13,11 @@ import mx.rokegcode.ordermanagement.model.data.Customer
 import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.view.dialog.AddCustomerDialog
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
-import mx.rokegcode.ordermanagement.viewmodel.OrderStateEvent
+import mx.rokegcode.ordermanagement.view.state.OrderStateEvent
 import mx.rokegcode.ordermanagement.viewmodel.OrderViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class OrderActivity : BaseActivity(), AddCustomerDialog.AddCustomerCallback {
+class OrderActivity : BaseActivity(), AddCustomerDialog.Interactor {
 
     private val orderViewModel: OrderViewModel by viewModel()
     private var mProgressDialog: SweetAlertDialog? = null
@@ -35,8 +35,11 @@ class OrderActivity : BaseActivity(), AddCustomerDialog.AddCustomerCallback {
 
     private fun initComponent() {
         btnAddCustomer.setOnClickListener {
-
+            val fragmentManager = supportFragmentManager
+            val addCustomerDialog = AddCustomerDialog.newInstance()
+            addCustomerDialog.show(fragmentManager, "add_customer")
         }
+        customerDropdown.inputType = InputType.TYPE_NULL
     }
 
     private fun initCustomerDropdown(customers: List<Customer>) {
@@ -45,12 +48,11 @@ class OrderActivity : BaseActivity(), AddCustomerDialog.AddCustomerCallback {
             R.layout.support_simple_spinner_dropdown_item,
             customers
         )
-        customerDropdown.inputType = InputType.TYPE_NULL
         customerDropdown.setAdapter(customerAdapter)
     }
 
     private fun subscribeObserver() {
-        orderViewModel.dataState.observe(this, Observer {
+        orderViewModel.customerList.observe(this, Observer {
             when(it) {
                 is DataState.Loading -> {
                     mProgressDialog = SweetDialogs.sweetLoading(this, it.message)

@@ -53,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
                     mProgressDialog!!.dismiss()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
+
                 }
                 is DataState.Error -> {
                     mProgressDialog!!.dismiss()

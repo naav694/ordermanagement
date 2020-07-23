@@ -11,22 +11,22 @@ import mx.rokegcode.ordermanagement.util.DataState
 class CustomerRepository(private val customerDao: CustomerDao) : ICustomerRepository {
 
     override fun getCustomers(): Flow<DataState<List<Customer>>> = flow {
-        DataState.Loading("Loading customers...")
+        emit(DataState.Loading("Loading customers..."))
         delay(1000)
         try {
-            DataState.Success(customerDao.getCustomers())
+            emit(DataState.Success(customerDao.getCustomers()))
         } catch (e: Exception) {
-            DataState.Error(e)
+            emit(DataState.Error(e))
         }
     }
 
     override fun setCustomer(customer: Customer): Flow<DataState<Long>> = flow {
-        DataState.Loading("Adding customer...")
+        emit(DataState.Loading("Adding customer..."))
         delay(1000)
         try {
-            DataState.Success(customerDao.setCustomer(customer))
+            emit(DataState.Success(customerDao.setCustomer(customer)))
         } catch (e: Exception) {
-            DataState.Error(e)
+            emit(DataState.Error(e))
         }
     }
 

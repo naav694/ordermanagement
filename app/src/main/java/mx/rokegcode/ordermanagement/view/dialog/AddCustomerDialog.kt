@@ -12,7 +12,7 @@ import mx.rokegcode.ordermanagement.model.data.Customer
 
 class AddCustomerDialog : DialogFragment() {
 
-    private lateinit var mCallback: AddCustomerCallback
+    private lateinit var mInteractor: Interactor
 
     companion object {
         fun newInstance(): AddCustomerDialog {
@@ -30,7 +30,7 @@ class AddCustomerDialog : DialogFragment() {
                 .setMessage("Customer Capture")
                 .setCancelable(false)
                 .setPositiveButton("Add") { dialog, _ ->
-                    mCallback.onAddClicked(
+                    mInteractor.onAddClicked(
                         Customer(
                             0,
                             dialogView.editCustomerName.text.toString(),
@@ -50,7 +50,7 @@ class AddCustomerDialog : DialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-
+            mInteractor = context as Interactor
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 (context.toString() + "must implement AddCustomerCallback")
@@ -58,7 +58,7 @@ class AddCustomerDialog : DialogFragment() {
         }
     }
 
-    interface AddCustomerCallback {
+    interface Interactor {
         fun onAddClicked(customer: Customer)
     }
 
