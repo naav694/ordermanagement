@@ -67,6 +67,22 @@ class OrderActivity : BaseActivity(), AddCustomerDialog.Interactor {
                 }
             }
         })
+
+        orderViewModel.customerInsert.observe(this, Observer {
+            when(it) {
+                is DataState.Loading -> {
+                    mProgressDialog = SweetDialogs.sweetLoading(this, it.message)
+                    mProgressDialog!!.show()
+                }
+                is DataState.Success -> {
+                    mProgressDialog!!.dismissWithAnimation()
+                    initCustomerDropdown(it.data)
+                }
+                is DataState.Error -> {
+                    SweetDialogs.sweetError(this, it.error.message).show()
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

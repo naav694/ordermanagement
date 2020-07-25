@@ -20,11 +20,12 @@ class CustomerRepository(private val customerDao: CustomerDao) : ICustomerReposi
         }
     }
 
-    override fun setCustomer(customer: Customer): Flow<DataState<Long>> = flow {
+    override fun setCustomer(customer: Customer): Flow<DataState<List<Customer>>> = flow {
         emit(DataState.Loading("Adding customer..."))
         delay(1000)
         try {
-            emit(DataState.Success(customerDao.setCustomer(customer)))
+            customerDao.setCustomer(customer)
+            emit(DataState.Success(customerDao.getCustomers()))
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }

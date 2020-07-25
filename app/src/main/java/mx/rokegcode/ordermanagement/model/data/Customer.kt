@@ -8,12 +8,11 @@ data class Customer(
     @PrimaryKey(autoGenerate = true)
     var idCustomer: Long = 0,
     var customerName: String = "",
-    var LastName: String = "",
+    var lastName: String = "",
     var customerPhone: String = "",
     var customerAddress: String = ""
 ) {
-
     override fun toString(): String {
-        return "$customerName $LastName"
+        return "$customerName $lastName"
     }
 }

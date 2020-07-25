@@ -6,5 +6,5 @@ import mx.rokegcode.ordermanagement.util.DataState
 
 interface ICustomerRepository {
     fun getCustomers(): Flow<DataState<List<Customer>>>
-    fun setCustomer(customer: Customer): Flow<DataState<Long>>
+    fun setCustomer(customer: Customer): Flow<DataState<List<Customer>>>
 }

@@ -25,15 +25,33 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutCustomerLastName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/customer_name"
+        app:layout_constraintEnd_toEndOf="@id/layoutCustomerName"
+        app:layout_constraintStart_toStartOf="@id/layoutCustomerName"
+        app:layout_constraintTop_toBottomOf="@id/layoutCustomerName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editCustomerLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutCustomerAddress"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/customer_address"
-        app:layout_constraintEnd_toEndOf="@id/layoutCustomerName"
-        app:layout_constraintStart_toStartOf="@id/layoutCustomerName"
-        app:layout_constraintTop_toBottomOf="@id/layoutCustomerName">
+        app:layout_constraintEnd_toEndOf="@id/layoutCustomerLastName"
+        app:layout_constraintStart_toStartOf="@id/layoutCustomerLastName"
+        app:layout_constraintTop_toBottomOf="@id/layoutCustomerLastName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editCustomerAddress"

@@ -18,10 +18,10 @@ class OrderViewModel(
     private val customerRepository: ICustomerRepository
 ) : ViewModel() {
     private val _customerList = MutableLiveData<DataState<List<Customer>>>()
-    val customerList: LiveData<DataState<List<Customer>>> = _customerList
+    val customerList: LiveData<DataState<List<Customer>>> get() = _customerList
 
-    private val _customerInsert = MutableLiveData<DataState<Long>>()
-    val customerInsert: LiveData<DataState<Long>> = _customerInsert
+    private val _customerInsert = MutableLiveData<DataState<List<Customer>>>()
+    val customerInsert: LiveData<DataState<List<Customer>>> get() = _customerInsert
 
     fun onCreateOrder(order: Order) {
         viewModelScope.launch {

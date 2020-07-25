@@ -34,8 +34,9 @@ class AddCustomerDialog : DialogFragment() {
                         Customer(
                             0,
                             dialogView.editCustomerName.text.toString(),
-                            dialogView.editCustomerAddress.text.toString(),
-                            dialogView.editCustomerPhone.text.toString()
+                            dialogView.editCustomerLastName.text.toString(),
+                            dialogView.editCustomerPhone.text.toString(),
+                            dialogView.editCustomerAddress.text.toString()
                         )
                     )
                     dialog.dismiss()
