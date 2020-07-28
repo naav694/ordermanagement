@@ -3,6 +3,7 @@ package mx.rokegcode.ordermanagement.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.User
@@ -21,10 +22,10 @@ class LoginViewModel(
     var rememberMe: Boolean = false
 
     private val _user = MutableLiveData<DataState<User>>()
-    val user: LiveData<DataState<User>> = _user
+    val user: LiveData<DataState<User>> get() = _user
 
     private val _loginForm = MutableLiveData<Boolean>()
-    val loginForm: LiveData<Boolean> = _loginForm
+    val loginForm: LiveData<Boolean> get() = _loginForm
 
     fun onLogin() {
         if (isLoginValid()) {

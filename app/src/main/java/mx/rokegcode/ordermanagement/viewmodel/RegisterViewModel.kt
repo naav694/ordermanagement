@@ -18,7 +18,7 @@ class RegisterViewModel(private val userRepository: IUserRepository) : ViewModel
 
 
     private val _idUser = MutableLiveData<DataState<Long>>()
-    val idUser: LiveData<DataState<Long>> = _idUser
+    val idUser: LiveData<DataState<Long>> get() = _idUser
 
     fun onCreateUser() {
         val user = User()
