@@ -42,7 +42,6 @@ class MyApplication : Application() {
                 helperModule
             )
         }
-
         registerBroadcast()
     }
 
