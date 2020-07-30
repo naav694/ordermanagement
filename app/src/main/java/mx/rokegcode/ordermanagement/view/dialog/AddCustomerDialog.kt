@@ -14,12 +14,6 @@ class AddCustomerDialog : DialogFragment() {
 
     private lateinit var mInteractor: Interactor
 
-    companion object {
-        fun newInstance(): AddCustomerDialog {
-            return AddCustomerDialog()
-        }
-    }
-
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {

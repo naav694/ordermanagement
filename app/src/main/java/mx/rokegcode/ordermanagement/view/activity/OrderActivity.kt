@@ -12,7 +12,9 @@ import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.model.data.Customer
 import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.view.dialog.AddCustomerDialog
+import mx.rokegcode.ordermanagement.view.dialog.DateDialog
 import mx.rokegcode.ordermanagement.view.dialog.SweetDialogs
+import mx.rokegcode.ordermanagement.view.dialog.TimeDialog
 import mx.rokegcode.ordermanagement.view.state.OrderStateEvent
 import mx.rokegcode.ordermanagement.viewmodel.OrderViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -35,9 +37,13 @@ class OrderActivity : BaseActivity(), AddCustomerDialog.Interactor {
 
     private fun initComponent() {
         btnAddCustomer.setOnClickListener {
-            val fragmentManager = supportFragmentManager
-            val addCustomerDialog = AddCustomerDialog.newInstance()
-            addCustomerDialog.show(fragmentManager, "add_customer")
+            AddCustomerDialog().show(supportFragmentManager, "add_customer")
+        }
+        editDeliveryDate.setOnClickListener {
+            DateDialog().show(supportFragmentManager, "date_picker")
+        }
+        editDeliveryHour.setOnClickListener {
+            TimeDialog().show(supportFragmentManager, "time_picker")
         }
         customerDropdown.inputType = InputType.TYPE_NULL
     }
