@@ -21,7 +21,7 @@ class TimeDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        mInteractor.onTimeSelected(String.format(Locale.getDefault(),"%d:%d", hourOfDay, minute))
+        mInteractor.onTimeSelected(String.format(Locale.getDefault(), "%d:%d", hourOfDay, minute))
     }
 
     override fun onAttach(context: Context) {
@@ -30,8 +30,7 @@ class TimeDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             mInteractor = context as AddTimeInteractor
         } catch (e: ClassCastException) {
             throw ClassCastException(
-                (context.toString() +
-                        " must implement AddDateInteractor")
+                ("$context must implement AddDateInteractor")
             )
         }
     }

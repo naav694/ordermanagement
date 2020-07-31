@@ -34,7 +34,7 @@ class DateDialog : DialogFragment(), DatePickerDialog.OnDateSetListener {
             mInteractor = context as AddDateInteractor
         } catch (e: ClassCastException) {
             throw ClassCastException(
-                (context.toString() + " must implement AddDateInteractor")
+                ("$context must implement AddDateInteractor")
             )
         }
     }

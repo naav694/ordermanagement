@@ -48,7 +48,7 @@ class AddCustomerDialog : DialogFragment() {
             mInteractor = context as Interactor
         } catch (e: ClassCastException) {
             throw ClassCastException(
-                (context.toString() + "must implement AddCustomerCallback")
+                ("$context must implement AddCustomerCallback")
             )
         }
     }
