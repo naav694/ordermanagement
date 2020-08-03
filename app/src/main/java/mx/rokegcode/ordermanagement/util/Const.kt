@@ -3,7 +3,7 @@ package mx.rokegcode.ordermanagement.util
 import android.net.Uri
 
 //Database
-const val DATABASE_VERSION = 3
+const val DATABASE_VERSION = 4
 const val DATABASE_NAME = "order_db"
 
 //Provider

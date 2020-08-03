@@ -37,9 +37,7 @@ class LoginViewModel(
                     when (it) {
                         is DataState.Success -> {
                             sessionHelper.setUserSession(it.data)
-                            if (rememberMe) {
-                                sessionHelper.setRememberSession(rememberMe)
-                            }
+                            sessionHelper.setRememberSession(rememberMe)
                         }
                     }
                     _user.value = it

@@ -23,13 +23,8 @@ class OrderViewModel(
     private val _customerInsert = MutableLiveData<DataState<List<Customer>>>()
     val customerInsert: LiveData<DataState<List<Customer>>> get() = _customerInsert
 
-    fun onCreateOrder(order: Order) {
-        viewModelScope.launch {
-            orderRepository.setOrder(order).collect {
-                //_dataState.value = dataState
-            }
-        }
-    }
+    private val _orderInsert = MutableLiveData<DataState<Long>>()
+    val orderInsert: LiveData<DataState<Long>> get() = _orderInsert
 
     fun setStateEvent(orderStateEvent: OrderStateEvent) {
         viewModelScope.launch {
@@ -42,6 +37,11 @@ class OrderViewModel(
                 is OrderStateEvent.SetCustomer -> {
                     customerRepository.setCustomer(orderStateEvent.customer).collect { dataState ->
                         _customerInsert.value = dataState
+                    }
+                }
+                is OrderStateEvent.SetOrder -> {
+                    orderRepository.setOrder(orderStateEvent.order).collect { dataState ->
+                        _orderInsert.value = dataState
                     }
                 }
             }

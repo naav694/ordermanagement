@@ -11,7 +11,7 @@ import java.util.*
 
 class DateDialog : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private lateinit var mInteractor: AddDateInteractor
+    private lateinit var mInteractor: Interactor
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
@@ -31,7 +31,7 @@ class DateDialog : DialogFragment(), DatePickerDialog.OnDateSetListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            mInteractor = context as AddDateInteractor
+            mInteractor = context as Interactor
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 ("$context must implement AddDateInteractor")
@@ -39,7 +39,7 @@ class DateDialog : DialogFragment(), DatePickerDialog.OnDateSetListener {
         }
     }
 
-    interface AddDateInteractor {
+    interface Interactor {
         fun onDateSelected(date: String)
     }
 }

@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!--<com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutSelectClient"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
@@ -47,20 +47,33 @@
                     android:inputType="text"
                     android:maxLines="1" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerCustomer"
+                style="@style/spinner_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/select_a_customer"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAddCustomer"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddCustomer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnAddCustomer" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddCustomer"
                 style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:icon="@drawable/add_user_50"
                 app:iconSize="45dp"
                 app:iconTint="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="@id/layoutSelectClient"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/layoutSelectClient" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutInputDeliveryDate"
@@ -69,11 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/delivery_date"
-                app:layout_MarginEnd="8dp"
-                app:layout_MarginStart="8dp"
-                app:layout_MarginTop="8dp"
-                app:layout_constraintStart_toStartOf="@+id/layoutSelectClient"
-                app:layout_constraintTop_toBottomOf="@id/layoutSelectClient"
+                app:layout_constraintStart_toStartOf="@+id/spinnerCustomer"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddCustomer"
                 app:layout_constraintWidth_default="percent"
                 app:layout_constraintWidth_percent="0.5">
 
@@ -95,7 +105,7 @@
                 android:layout_marginStart="8dp"
                 android:hint="@string/delivery_hour"
                 app:layout_constraintBottom_toBottomOf="@id/layoutInputDeliveryDate"
-                app:layout_constraintEnd_toEndOf="@id/btnAddCustomer"
+                app:layout_constraintEnd_toEndOf="@+id/btnAddCustomer"
                 app:layout_constraintStart_toEndOf="@id/layoutInputDeliveryDate"
                 app:layout_constraintTop_toTopOf="@id/layoutInputDeliveryDate">
 
@@ -217,37 +227,13 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/advance"
                 app:layout_constraintBottom_toTopOf="@id/btnCreateOrder"
+                app:layout_constraintEnd_toEndOf="@+id/layoutInputProductPrice"
                 app:layout_constraintStart_toStartOf="@id/layoutInputProductPrice"
                 app:layout_constraintTop_toBottomOf="@id/layoutInputProductPrice"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.45">
+                app:layout_constraintVertical_bias="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editAdvanceOrder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutInputDebitOrder"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/debit"
-                app:layout_constraintBottom_toBottomOf="@id/layoutInputAdvanceOrder"
-                app:layout_constraintEnd_toEndOf="@id/layoutInputProductPrice"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@id/layoutInputAdvanceOrder"
-                app:layout_constraintTop_toTopOf="@id/layoutInputAdvanceOrder"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.45">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editDebitOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"

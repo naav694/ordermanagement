@@ -11,7 +11,7 @@ import java.util.*
 
 class TimeDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
-    private lateinit var mInteractor: AddTimeInteractor
+    private lateinit var mInteractor: Interactor
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
@@ -27,7 +27,7 @@ class TimeDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            mInteractor = context as AddTimeInteractor
+            mInteractor = context as Interactor
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 ("$context must implement AddDateInteractor")
@@ -35,7 +35,7 @@ class TimeDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    interface AddTimeInteractor {
+    interface Interactor {
         fun onTimeSelected(time: String)
     }
 }

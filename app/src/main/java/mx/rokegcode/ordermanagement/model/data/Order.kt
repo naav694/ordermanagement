@@ -8,6 +8,7 @@ data class Order(
     var idCustomer: Long?,
     var orderDate: String?,
     var deliveryDate: String?,
+    var deliveryHour: String?,
     var deliveryPlace: String?,
     var productDescription: String?,
     var fillingProduct: String?,
