@@ -38,4 +38,6 @@
     <string name="customer_address">Customer Address</string>
     <string name="customer_phone_number">Customer Phone Number</string>
     <string name="delivery_hour">Delivery hour</string>
+    <string name="view_detail">View Detail</string>
+    <string name="finish_order">Finish order</string>
 </resources>
