@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mx.rokegcode.ordermanagement.model.data.Customer
+import mx.rokegcode.ordermanagement.model.data.JoinOrderCustomer
 import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.util.DataState
@@ -16,8 +17,8 @@ class MainViewModel(
     sessionHelper: ISessionHelper
 ) : BaseViewModel(sessionHelper) {
 
-    private val _resultOrders = MutableLiveData<DataState<List<Order>>>()
-    val resultOrders: LiveData<DataState<List<Order>>> get() = _resultOrders
+    private val _resultOrders = MutableLiveData<DataState<List<JoinOrderCustomer>>>()
+    val resultOrders: LiveData<DataState<List<JoinOrderCustomer>>> get() = _resultOrders
 
     fun getOrders() {
         viewModelScope.launch {

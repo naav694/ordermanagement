@@ -17,5 +17,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun orderDao(): OrderDao
     abstract fun userDao(): UserDao
     abstract fun customerDao(): CustomerDao
+    abstract fun joinOrderCustomerDao(): JoinOrderCustomerDao
 
 }

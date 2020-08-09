@@ -59,8 +59,7 @@ class OrderActivity : BaseActivity(), AddCustomerDialog.Interactor, DateDialog.I
                 editProductDesign.text.toString(),
                 editProductPrice.text.toString().toDouble(),
                 editAdvanceOrder.text.toString().toDouble(),
-                0.0,
-                0
+                0.0
             )
             orderViewModel.setStateEvent(OrderStateEvent.SetOrder(order))
         }

@@ -26,7 +26,6 @@ class AddCustomerDialog : DialogFragment() {
                 .setPositiveButton("Add") { dialog, _ ->
                     mInteractor.onAddClicked(
                         Customer(
-                            0,
                             dialogView.editCustomerName.text.toString(),
                             dialogView.editCustomerLastName.text.toString(),
                             dialogView.editCustomerPhone.text.toString(),

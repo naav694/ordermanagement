@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.item_order.view.*
 import mx.rokegcode.ordermanagement.R
+import mx.rokegcode.ordermanagement.model.data.JoinOrderCustomer
 import mx.rokegcode.ordermanagement.model.data.Order
 import java.text.NumberFormat
 import java.util.*
 
-class OrderAdapter(private var orderList: List<Order>) :
+class OrderAdapter(private var orderList: List<JoinOrderCustomer>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -24,8 +25,11 @@ class OrderAdapter(private var orderList: List<Order>) :
     override fun getItemCount(): Int = orderList.size
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        val order = orderList[position]
+        val order = orderList[position].order
+        val customer = orderList[position].customer
         holder.textDeliveryDate.text = order.deliveryDate
+        holder.textClientOrder.text =
+            String.format(Locale.getDefault(), "%s %s", customer.customerName, customer.lastName)
         holder.textProductDesc.text = order.productDescription
         holder.textPrice.text =
             NumberFormat.getCurrencyInstance(Locale.getDefault()).format(order.productPrice)

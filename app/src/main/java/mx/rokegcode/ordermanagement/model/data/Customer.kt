@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "customer")
 data class Customer(
-    @PrimaryKey(autoGenerate = true)
-    var idCustomer: Long = 0,
     var customerName: String = "",
     var lastName: String = "",
     var customerPhone: String = "",
-    var customerAddress: String = ""
+    var customerAddress: String = "",
+    @PrimaryKey(autoGenerate = true)
+    var idCustomer: Long = 0
 ) {
     override fun toString(): String {
         return "$customerName $lastName"

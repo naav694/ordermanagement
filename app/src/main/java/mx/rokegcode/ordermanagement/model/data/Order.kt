@@ -1,9 +1,14 @@
 package mx.rokegcode.ordermanagement.model.data
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "order")
+@Entity(tableName = "order", foreignKeys = [
+    ForeignKey(entity = Customer::class,
+        parentColumns = ["idCustomer"],
+        childColumns = ["idCustomer"],
+        onDelete = ForeignKey.NO_ACTION)])
 data class Order(
     var idCustomer: Long?,
     var orderDate: String?,
@@ -17,5 +22,5 @@ data class Order(
     var advanceOrder: Double?,
     var debitOrder: Double?,
     @PrimaryKey(autoGenerate = true)
-    var idOrder: Long?
+    var idOrder: Long = 0
 )

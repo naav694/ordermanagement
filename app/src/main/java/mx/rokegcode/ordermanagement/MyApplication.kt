@@ -77,7 +77,7 @@ class MyApplication : Application() {
 
     private val repositoryModule = module {
         factory<IUserRepository> { UserRepository(get()) }
-        factory<IOrderRepository> { OrderRepository(get()) }
+        factory<IOrderRepository> { OrderRepository(get(), get()) }
         factory<ICustomerRepository> { CustomerRepository(get()) }
     }
 
@@ -92,6 +92,7 @@ class MyApplication : Application() {
         single { get<AppDatabase>().userDao() }
         single { get<AppDatabase>().orderDao() }
         single { get<AppDatabase>().customerDao() }
+        single { get<AppDatabase>().joinOrderCustomerDao() }
     }
 
     private val helperModule = module {

@@ -11,6 +11,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import mx.rokegcode.ordermanagement.R
+import mx.rokegcode.ordermanagement.model.data.JoinOrderCustomer
 import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.view.adapter.OrderAdapter
@@ -59,7 +60,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun initOrderRecyclerView(orderList: List<Order>) {
+    private fun initOrderRecyclerView(orderList: List<JoinOrderCustomer>) {
         orderAdapter = OrderAdapter(orderList)
         val layout = LinearLayoutManager(this)
         orderRecyclerView.apply {
