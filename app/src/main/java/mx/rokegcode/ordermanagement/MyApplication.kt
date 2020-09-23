@@ -12,10 +12,10 @@ import com.google.gson.Gson
 import mx.rokegcode.ordermanagement.model.db.AppDatabase
 import mx.rokegcode.ordermanagement.model.repository.implementation.CustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.OrderRepository
-import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.UserRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.ICustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
+import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.receiver.NotificationReceiver
 import mx.rokegcode.ordermanagement.util.CHANNEL_ID
 import mx.rokegcode.ordermanagement.util.DATABASE_NAME

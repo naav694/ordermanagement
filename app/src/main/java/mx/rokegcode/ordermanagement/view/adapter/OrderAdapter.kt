@@ -9,7 +9,6 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.item_order.view.*
 import mx.rokegcode.ordermanagement.R
 import mx.rokegcode.ordermanagement.model.data.JoinOrderCustomer
-import mx.rokegcode.ordermanagement.model.data.Order
 import java.text.NumberFormat
 import java.util.*
 
