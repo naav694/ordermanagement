@@ -87,14 +87,18 @@ dependencies {
     }
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
+    //Unit Test
+
     //Robolectric environment
     testImplementation 'androidx.test:core:1.3.0'
     //Mockito framework
     testImplementation 'org.mockito:mockito-core:1.10.19'
     //Truth
     testImplementation "com.google.truth:truth:1.0.1"
-
+    //JUnit
     testImplementation 'junit:junit:4.13'
+
+    //Instrumented Unit Test
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
