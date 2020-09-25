@@ -9,24 +9,31 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.room.Room
 import com.google.gson.Gson
+import mx.rokegcode.ordermanagement.model.api.OrderService
 import mx.rokegcode.ordermanagement.model.db.AppDatabase
 import mx.rokegcode.ordermanagement.model.repository.implementation.CustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.OrderRepository
-import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.model.repository.implementation.UserRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.ICustomerRepository
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
+import mx.rokegcode.ordermanagement.model.repository.interfaces.IUserRepository
 import mx.rokegcode.ordermanagement.receiver.NotificationReceiver
 import mx.rokegcode.ordermanagement.util.CHANNEL_ID
 import mx.rokegcode.ordermanagement.util.DATABASE_NAME
 import mx.rokegcode.ordermanagement.util.SessionHelper
 import mx.rokegcode.ordermanagement.util.interfaces.ISessionHelper
 import mx.rokegcode.ordermanagement.viewmodel.*
+import okhttp3.Cache
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class MyApplication : Application() {
 
@@ -38,6 +45,7 @@ class MyApplication : Application() {
             modules(
                 viewModelModule,
                 databaseModule,
+                retrofitModule,
                 repositoryModule,
                 helperModule
             )
@@ -95,8 +103,35 @@ class MyApplication : Application() {
         single { get<AppDatabase>().joinOrderCustomerDao() }
     }
 
-    private val helperModule = module {
+    private val retrofitModule = module {
+        single {
+            val cacheSize: Long = 10 * 1024 * 1024 // 10mb
+            val mCache = Cache(cacheDir, cacheSize)
+            OkHttpClient().newBuilder()
+                .cache(mCache)
+                .addInterceptor(HttpLoggingInterceptor().apply {
+                    level =
+                        HttpLoggingInterceptor.Level.BODY
+                })
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+        }
+
         single { Gson() }
+
+        single {
+            Retrofit.Builder()
+                .baseUrl("http://ac.devmaw.com/")
+                .client(get())
+                .addConverterFactory(GsonConverterFactory.create(get()))
+                .build()
+        }
+
+        single { get<Retrofit>().create(OrderService::class.java) }
+    }
+
+    private val helperModule = module {
 
         single<SharedPreferences> {
             androidContext().getSharedPreferences("SharedOrderManagement", Context.MODE_PRIVATE)

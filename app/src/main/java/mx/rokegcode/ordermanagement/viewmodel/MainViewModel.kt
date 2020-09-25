@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import mx.rokegcode.ordermanagement.model.data.Customer
 import mx.rokegcode.ordermanagement.model.data.JoinOrderCustomer
-import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.repository.interfaces.IOrderRepository
 import mx.rokegcode.ordermanagement.util.DataState
 import mx.rokegcode.ordermanagement.util.interfaces.ISessionHelper
