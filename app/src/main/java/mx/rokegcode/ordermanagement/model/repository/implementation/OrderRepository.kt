@@ -3,6 +3,8 @@ package mx.rokegcode.ordermanagement.model.repository.implementation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import mx.rokegcode.ordermanagement.model.api.response.OrderResponse
+import mx.rokegcode.ordermanagement.model.api.service.OrderService
 import mx.rokegcode.ordermanagement.model.data.JoinOrderCustomer
 import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.db.JoinOrderCustomerDao
@@ -12,7 +14,8 @@ import mx.rokegcode.ordermanagement.util.DataState
 
 class OrderRepository(
     private val orderCustomerDao: JoinOrderCustomerDao,
-    private val orderDao: OrderDao
+    private val orderDao: OrderDao,
+    private val orderService: OrderService
     ) : IOrderRepository {
 
     override fun setOrder(order: Order): Flow<DataState<Long>> = flow {
@@ -34,6 +37,20 @@ class OrderRepository(
             emit(DataState.Success(response))
         } catch (e: Exception) {
             emit(DataState.Error(e))
+        }
+    }
+
+    override fun uploadOrders(orders: List<Order>): Flow<DataState<OrderResponse>> = flow {
+        emit(DataState.Loading("Uploading orders..."))
+        try {
+            val response = orderService.uploadOrders(
+                "",
+                "",
+                orders
+            )
+            emit(DataState.Success(response))
+        } catch (e: Exception) {
+
         }
     }
 }

@@ -49,7 +49,9 @@ class MyApplication : Application() {
                 repositoryModule,
                 helperModule
             )
+            koin.createRootScope()
         }
+
         registerBroadcast()
     }
 
@@ -85,7 +87,7 @@ class MyApplication : Application() {
 
     private val repositoryModule = module {
         factory<IUserRepository> { UserRepository(get()) }
-        factory<IOrderRepository> { OrderRepository(get(), get()) }
+        factory<IOrderRepository> { OrderRepository(get(), get(),get()) }
         factory<ICustomerRepository> { CustomerRepository(get()) }
     }
 

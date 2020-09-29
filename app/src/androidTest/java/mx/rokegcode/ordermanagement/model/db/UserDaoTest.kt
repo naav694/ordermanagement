@@ -8,7 +8,6 @@ import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import mx.rokegcode.ordermanagement.model.data.Order
 import mx.rokegcode.ordermanagement.model.data.User
 import org.junit.After
 import org.junit.Before

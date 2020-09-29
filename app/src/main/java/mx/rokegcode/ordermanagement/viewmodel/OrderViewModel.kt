@@ -25,23 +25,21 @@ class OrderViewModel(
     private val _orderInsert = MutableLiveData<DataState<Long>>()
     val orderInsert: LiveData<DataState<Long>> get() = _orderInsert
 
-    fun setStateEvent(orderStateEvent: OrderStateEvent) {
-        viewModelScope.launch {
-            when (orderStateEvent) {
-                is OrderStateEvent.GetCustomers -> {
-                    customerRepository.getCustomers().collect { dataState ->
-                        _customerList.value = dataState
-                    }
+    fun setStateEvent(orderStateEvent: OrderStateEvent) = viewModelScope.launch {
+        when (orderStateEvent) {
+            is OrderStateEvent.GetCustomers -> {
+                customerRepository.getCustomers().collect { dataState ->
+                    _customerList.value = dataState
                 }
-                is OrderStateEvent.SetCustomer -> {
-                    customerRepository.setCustomer(orderStateEvent.customer).collect { dataState ->
-                        _customerInsert.value = dataState
-                    }
+            }
+            is OrderStateEvent.SetCustomer -> {
+                customerRepository.setCustomer(orderStateEvent.customer).collect { dataState ->
+                    _customerInsert.value = dataState
                 }
-                is OrderStateEvent.SetOrder -> {
-                    orderRepository.setOrder(orderStateEvent.order).collect { dataState ->
-                        _orderInsert.value = dataState
-                    }
+            }
+            is OrderStateEvent.SetOrder -> {
+                orderRepository.setOrder(orderStateEvent.order).collect { dataState ->
+                    _orderInsert.value = dataState
                 }
             }
         }
